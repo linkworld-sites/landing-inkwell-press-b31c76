@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><style id='brand'>:root{
+  --bg:#0b0b0c; --surface:#141417; --surface-2:#1c1c21;
+  --fg:#f5f5f7; --fg-muted:#a1a1aa; --border:#26262b;
+  --accent:#3b82f6; --accent-fg:#fff; --radius:14px; --maxw:1100px;
+  --font:'Inter',system-ui,-apple-system,Segoe UI,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.section{padding:96px 0}
+.hero{padding:140px 0 90px;text-align:center}
+h1{font-size:clamp(2.5rem,6vw,4.5rem);line-height:1.05;letter-spacing:-.02em}
+h2{font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:-.01em}
+.muted{color:var(--fg-muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--accent-fg);padding:14px 28px;border-radius:var(--radius);font-weight:600;text-decoration:none;border:0;cursor:pointer;transition:transform .15s ease,opacity .15s ease}
+.btn:hover{transform:translateY(-2px);opacity:.92}
+.btn-ghost{background:transparent;color:var(--fg);border:1px solid var(--border)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px}
+.grid{display:grid;gap:24px}
+@media(max-width:640px){.section{padding:64px 0}.hero{padding:96px 0 64px}}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pressed & Co. — Artisan Letterpress Printing</title>
+<style>
+  /* ── Brand overrides & custom vars ── */
+  :root {
+    --bg: #FAF7F2;
+    --surface: #F2EDE4;
+    --fg: #1E1A15;
+    --fg-muted: #6B6157;
+    --accent: #8B4513;
+    --accent-light: #C4845A;
+    --accent-pale: #F5E6D8;
+    --border: #DDD4C5;
+    --radius: 4px;
+    --ink: #2C1810;
+    --gold: #B8965A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* Utility classes assumed injected — re-declare for safety */
+  .container { width: min(1140px, 92vw); margin: 0 auto; }
+  .section { padding: 6rem 0; }
+  .muted { color: var(--fg-muted); }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+  }
+  .grid { display: grid; gap: 2rem; }
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #FAF7F2;
+    padding: 0.85rem 2.2rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 2px solid var(--accent);
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s, transform 0.15s;
+  }
+  .btn:hover { background: var(--ink); border-color: var(--ink); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s, transform 0.15s;
+  }
+  .btn-ghost:hover { background: var(--accent); color: #FAF7F2; transform: translateY(-2px); }
+
+  /* ── Nav ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250, 247, 242, 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 0;
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 20px rgba(30,26,21,0.08); }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-size: 1.35rem;
+    letter-spacing: 0.12em;
+    font-weight: normal;
+    color: var(--ink);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--fg-muted);
+    font-family: 'Georgia', serif;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── Hero ── */
+  .hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 5rem;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(139,69,19,0.06) 0%, transparent 70%),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 39px,
+        rgba(139,69,19,0.04) 39px,
+        rgba(139,69,19,0.04) 40px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 39px,
+        rgba(139,69,19,0.04) 39px,
+        rgba(139,69,19,0.04) 40px
+      );
+  }
+  .hero-content {
+    position: relative;
+    max-width: 680px;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero-headline {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 1.12;
+    color: var(--ink);
+    font-weight: normal;
+    margin-bottom: 1.4rem;
+    letter-spacing: -0.01em;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--fg-muted);
+    max-width: 500px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .hero-proof {
+    margin-top: 3.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .proof-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .proof-num {
+    font-size: 1.6rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .proof-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-muted); }
+  .proof-divider { width: 1px; height: 36px; background: var(--border); }
+
+  /* Hero ornament */
+  .hero-ornament {
+    position: absolute;
+    right: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 520px;
+    height: 520px;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  /* ── Section headers ── */
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+    font-weight: normal;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .section-lead {
+    font-size: 1.05rem;
+    color: var(--fg-muted);
+    max-width: 540px;
+    line-height: 1.8;
+  }
+  .section-header { margin-bottom: 3.5rem; }
+  .section-header.centered { text-align: center; }
+  .section-header.centered .section-lead { margin: 0 auto; }
+
+  /* ── Craft strip ── */
+  .craft-strip {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 1.1rem 0;
+    overflow: hidden;
+  }
+  .craft-ticker {
+    display: flex;
+    gap: 3rem;
+    white-space: nowrap;
+    animation: ticker 24s linear infinite;
+  }
+  .craft-ticker span {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+  .craft-ticker .dot { color: var(--gold); opacity: 1; font-size: 1rem; line-height: 1; }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── Features / Why Letterpress ── */
+  .features-section { background: var(--surface); }
+  .features-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .feature-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2.2rem 1.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--accent);
+    transition: height 0.35s ease;
+  }
+  .feature-card:hover::before { height: 100%; }
+  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(30,26,21,0.09); }
+  .feature-icon {
+    width: 48px; height: 48px;
+    background: var(--accent-pale);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem;
+    font-size: 1.4rem;
+  }
+  .feature-title {
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+    font-weight: normal;
+  }
+  .feature-desc { font-size: 0.92rem; color: var(--fg-muted); line-height: 1.75; }
+
+  /* ── Process ── */
+  .process-section { background: var(--bg); }
+  .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; }
+  .process-step {
+    position: relative;
+    padding: 2rem 1.5rem 2rem 2rem;
+    border-top: 2px solid var(--border);
+  }
+  .process-step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -0.4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    font-size: 1.2rem;
+    z-index: 1;
+  }
+  .step-num {
+    font-size: 3rem;
+    color: var(--accent-pale);
+    line-height: 1;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .step-title { font-size: 1rem; color: var(--ink); margin-bottom: 0.4rem; font-weight: normal; letter-spacing: 0.04em; }
+  .step-desc { font-size: 0.88rem; color: var(--fg-muted); line-height: 1.7; }
+
+  /* ── Products / Services ── */
+  .products-section { background: var(--surface); }
+  .products-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .product-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .product-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(30,26,21,0.1); }
+  .product-thumb {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-thumb svg { width: 100%; height: 100%; position: absolute; inset: 0; }
+  .product-thumb-label {
+    position: relative;
+    z-index: 1;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(44,24,16,0.5);
+  }
+  .product-body { padding: 1.6rem; }
+  .product-name { font-size: 1.1rem; color: var(--ink); margin-bottom: 0.4rem; font-weight: normal; }
+  .product-desc { font-size: 0.9rem; color: var(--fg-muted); line-height: 1.7; margin-bottom: 1rem; }
+  .product-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-pale);
+    padding: 0.25rem 0.7rem;
+    border-radius: 2px;
+  }
+
+  /* Thumb patterns */
+  .thumb-wedding { background: linear-gradient(135deg, #F5E6D8 0%, #EDD9C5 100%); }
+  .thumb-business { background: linear-gradient(135deg, #E8E0D5 0%, #D9CFC2 100%); }
+  .thumb-stationery { background: linear-gradient(135deg, #F0EBE3 0%, #E3D9CC 100%); }
+  .thumb-art { background: linear-gradient(135deg, #E5DDD4 0%, #D8CCBF 100%); }
+  .thumb-packaging { background: linear-gradient(135deg, #EDE5DB 0%, #E0D4C5 100%); }
+  .thumb-event { background: linear-gradient(135deg, #F2E9DF 0%, #E8DCCF 100%); }
+
+  /* ── Testimonials ── */
+  .testimonials-section { background: var(--ink); color: var(--bg); }
+  .testimonials-section .section-title { color: #FAF7F2; }
+  .testimonials-section .section-label { color: var(--gold); }
+  .testimonials-section .section-lead { color: rgba(250,247,242,0.65); }
+  .testimonials-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .testimonial-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    padding: 2rem;
+    position: relative;
+  }
+  .testimonial-card::before {
+    content: '\201C';
+    font-size: 5rem;
+    color: var(--gold);
+    opacity: 0.3;
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    line-height: 1;
+    font-family: Georgia, serif;
+  }
+  .testimonial-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: rgba(250,247,242,0.85);
+    margin-bottom: 1.25rem;
+    position: relative;
+    z-index: 1;
+  }
+  .testimonial-author { font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+  .testimonial-role { font-size: 0.78rem; color: rgba(250,247,242,0.45); margin-top: 0.2rem; }
+  .stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 0.75rem; letter-spacing: 2px; }
+
+  /* ── Pricing ── */
+  .pricing-section { background: var(--bg); }
+  .pricing-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); align-items: start; }
+  .pricing-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2.4rem 2rem;
+    background: var(--surface);
+    position: relative;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .pricing-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(30,26,21,0.09); }
+  .pricing-card.featured {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #FAF7F2;
+  }
+  .pricing-card.featured .pricing-name { color: #FAF7F2; }
+  .pricing-card.featured .pricing-price { color: var(--gold); }
+  .pricing-card.featured .pricing-desc { color: rgba(250,247,242,0.6); }
+  .pricing-card.featured .pricing-feature { color: rgba(250,247,242,0.8); }
+  .pricing-card.featured .pricing-feature::before { color: var(--gold); }
+  .featured-badge {
+    position: absolute;
+    top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--accent);
+    color: #FAF7F2;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.3rem 1rem;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .pricing-name { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  .pricing-price { font-size: 2.4rem; color: var(--ink); line-height: 1; margin-bottom: 0.3rem; }
+  .pricing-price sup { font-size: 1.2rem; vertical-align: super; }
+  .pricing-price sub { font-size: 0.9rem; color: var(--fg-muted); }
+  .pricing-desc { font-size: 0.88rem; color: var(--fg-muted); margin-bottom: 1.5rem; line-height: 1.6; }
+  .pricing-features { list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.65rem; }
+  .pricing-feature { font-size: 0.9rem; color: var(--fg-muted); padding-left: 1.3rem; position: relative; }
+  .pricing-feature::before { content: '✦'; position: absolute; left: 0; color: var(--accent); font-size: 0.6rem; top: 0.25rem; }
+  .pricing-card.featured .btn-ghost { border-color: var(--gold); color: var(--gold); }
+  .pricing-card.featured .btn-ghost:hover { background: var(--gold); color: var(--ink); }
+
+  /* ── Materials strip ── */
+  .materials-strip {
+    background: var(--accent-pale);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 0;
+  }
+  .materials-inner {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .materials-heading { font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+  .materials-list { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .material-chip {
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    background: var(--bg);
+    transition: border-color 0.2s, color 0.2s;
+    cursor: default;
+  }
+  .material-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── CTA Banner ── */
+  .cta-banner {
+    background: var(--accent);
+    color: #FAF7F2;
+    padding: 5rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 30px,
+        rgba(255,255,255,0.03) 30px,
+        rgba(255,255,255,0.03) 31px
+      );
+  }
+  .cta-banner h2 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: normal;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .cta-banner h2 em { font-style: italic; opacity: 0.85; }
+  .cta-banner p { font-size: 1.05rem; opacity: 0.8; margin-bottom: 2.5rem; position: relative; }
+  .cta-banner .btn {
+    background: #FAF7F2;
+    color: var(--accent);
+    border-color: #FAF7F2;
+  }
+  .cta-banner .btn:hover { background: var(--ink); color: #FAF7F2; border-color: var(--ink); }
+  .cta-banner .btn-ghost {
+    color: #FAF7F2;
+    border-color: rgba(255,255,255,0.6);
+  }
+  .cta-banner .btn-ghost:hover { background: rgba(255,255,255,0.15); color: #FAF7F2; }
+  .cta-btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--ink);
+    color: rgba(250,247,242,0.65);
+    padding: 4rem 0 2rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand-name {
+    font-size: 1.2rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #FAF7F2;
+    margin-bottom: 0.75rem;
+  }
+  .footer-brand-name span { color: var(--gold); }
+  .footer-tagline { font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.25rem; color: rgba(250,247,242,0.5); }
+  .footer-social { display: flex; gap: 0.75rem; }
+  .social-link {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+    color: rgba(250,247,242,0.5);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .social-link:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-col-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #FAF7F2;
+    margin-bottom: 1rem;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+  .footer-links a {
+    text-decoration: none;
+    color: rgba(250,247,242,0.5);
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-copy { font-size: 0.8rem; color: rgba(250,247,242,0.3); }
+  .footer-legal { display: flex; gap: 1.5rem; }
+  .footer-legal a { font-size: 0.8rem; color: rgba(250,247,242,0.3); text-decoration: none; transition: color 0.2s; }
+  .footer-legal a:hover { color: var(--gold); }
+
+  /* ── Scroll reveal (default: visible; JS only enhances) ── */
+  .reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.hidden {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  /* ── Ornamental divider ── */
+  .ornament-divider {
+    text-align: center;
+    padding: 0.5rem 0;
+    color: var(--accent);
+    font-size: 1.1rem;
+    letter-spacing: 0.5rem;
+    opacity: 0.4;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .process-steps { grid-template-columns: 1fr; }
+    .process-step:not(:last-child)::after { display: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .hero-ornament { display: none; }
+    .materials-inner { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 480px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero-cta-group { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav id="main-nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">Pressed <span>&</span> Co.</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="btn" style="padding:0.5rem 1.4rem;font-size:0.82rem;">Get a Quote</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero-section" id="home">
+  <div class="hero-bg"></div>
+  <!-- SVG Ornament -->
+  <svg class="hero-ornament" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="200" cy="200" r="180" stroke="#8B4513" stroke-width="1"/>
+    <circle cx="200" cy="200" r="155" stroke="#8B4513" stroke-width="0.5" stroke-dasharray="4 8"/>
+    <circle cx="200" cy="200" r="130" stroke="#8B4513" stroke-width="1"/>
+    <line x1="20" y1="200" x2="380" y2="200" stroke="#8B4513" stroke-width="0.5"/>
+    <line x1="200" y1="20" x2="200" y2="380" stroke="#8B4513" stroke-width="0.5"/>
+    <line x1="73" y1="73" x2="327" y2="327" stroke="#8B4513" stroke-width="0.5" stroke-dasharray="3 6"/>
+    <line x1="327" y1="73" x2="73" y2="327" stroke="#8B4513" stroke-width="0.5" stroke-dasharray="3 6"/>
+    <circle cx="200" cy="200" r="8" stroke="#8B4513" stroke-width="1"/>
+    <circle cx="200" cy="200" r="3" fill="#8B4513"/>
+    <polygon points="200,30 207,50 200,45 193,50" fill="#8B4513" opacity="0.5"/>
+    <polygon points="200,370 207,350 200,355 193,350" fill="#8B4513" opacity="0.5"/>
+    <polygon points="30,200 50,193 45,200 50,207" fill="#8B4513" opacity="0.5"/>
+    <polygon points="370,200 350,193 355,200 350,207" fill="#8B4513" opacity="0.5"/>
+  </svg>
+
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Artisan Letterpress Studio</div>
+      <h1 class="hero-headline">
+        Where <em>craft</em> meets<br>the printed word.
+      </h1>
+      <p class="hero-sub">
+        Heirloom-quality letterpress printing for wedding suites, bespoke stationery, business cards, and editorial work. Every impression tells a story.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#services" class="btn">Explore Our Work</a>
+        <a href="#pricing" class="btn-ghost">View Pricing</a>
+      </div>
+      <div class="hero-proof">
+        <div class="proof-item">
+          <span class="proof-num">2,400+</span>
+          <span class="proof-label">Projects completed</span>
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-item">
+          <span class="proof-num">14 yrs</span>
+          <span class="proof-label">In the craft</span>
+        </div>
+        <div class="proof-divider"></div>
+        <div class="proof-item">
+          <span class="proof-num">100%</span>
+          <span class="proof-label">Handcrafted</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Ticker Strip ── -->
+<div class="craft-strip">
+  <div class="craft-ticker">
+    <span>Wedding Invitations</span><span class="dot">✦</span>
+    <span>Business Cards</span><span class="dot">✦</span>
+    <span>Greeting Cards</span><span class="dot">✦</span>
+    <span>Bespoke Stationery</span><span class="dot">✦</span>
+    <span>Art Prints</span><span class="dot">✦</span>
+    <span>Packaging Labels</span><span class="dot">✦</span>
+    <span>Event Programs</span><span class="dot">✦</span>
+    <span>Notecards</span><span class="dot">✦</span>
+    <span>Brand Identity</span><span class="dot">✦</span>
+    <!-- duplicate for seamless loop -->
+    <span>Wedding Invitations</span><span class="dot">✦</span>
+    <span>Business Cards</span><span class="dot">✦</span>
+    <span>Greeting Cards</span><span class="dot">✦</span>
+    <span>Bespoke Stationery</span><span class="dot">✦</span>
+    <span>Art Prints</span><span class="dot">✦</span>
+    <span>Packaging Labels</span><span class="dot">✦</span>
+    <span>Event Programs</span><span class="dot">✦</span>
+    <span>Notecards</span><span class="dot">✦</span>
+    <span>Brand Identity</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- ── Why Letterpress ── -->
+<section class="section features-section" id="about">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Why Letterpress</p>
+      <h2 class="section-title">A craft with <em>depth</em> and permanence</h2>
+      <p class="section-lead">In a world of digital noise, letterpress printing creates something tangible, textured, and treasured. Each piece bears the unmistakable mark of the press.</p>
+    </div>
+    <div class="grid features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">⬛</div>
+        <h3 class="feature-title">Deep Impression</h3>
+        <p class="feature-desc">Our antique Heidelberg windmill presses create that signature debossed texture — felt with the fingertips, not just seen with the eyes.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🎨</div>
+        <h3 class="feature-title">Custom Ink Mixing</h3>
+        <p class="feature-desc">From rich earth tones to fluorescent accents, we mix every ink by hand to match your palette with precision and consistency.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">📄</div>
+        <h3 class="feature-title">Archival Papers</h3>
+        <p class="feature-desc">We source acid-free, cotton-rag papers from heritage mills — Crane, Lettra, and Gmund — stocks that age with grace.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">✦</div>
+        <h3 class="feature-title">Foil & Embossing</h3>
+        <p class="feature-desc">Complement your letterpress with blind embossing, hot foil stamping in gold, silver, rose gold, and more.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">✉</div>
+        <h3 class="feature-title">Bespoke Consultation</h3>
+        <p class="feature-desc">Every project begins with a dedicated design consultation. We guide you from concept to finished suite, start to finish.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🌱</div>
+        <h3 class="feature-title">Sustainably Sourced</h3>
+        <p class="feature-desc">We use soy-based inks, FSC-certified papers, and compostable packaging — craftsmanship that respects the planet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Process ── -->
+<section class="section process-section" id="process">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Our Process</p>
+      <h2 class="section-title">From brief to <em>beautiful</em></h2>
+      <p class="section-lead">A refined, collaborative workflow designed to produce extraordinary results with minimal stress on your end.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <span class="step-num">01</span>
+        <h3 class="step-title">Consultation</h3>
+        <p class="step-desc">Share your vision, timeline, and aesthetic preferences. We listen, ask the right questions, and establish your project scope.</p>
+      </div>
+      <div class="process-step reveal">
+        <span class="step-num">02</span>
+        <h3 class="step-title">Design</h3>
+        <p class="step-desc">Our in-house designers craft custom layouts, or we adapt your existing artwork for optimal letterpress reproduction.</p>
+      </div>
+      <div class="process-step reveal">
+        <span class="step-num">03</span>
+        <h3 class="step-title">Proof & Approve</h3>
+        <p class="step-desc">Receive a digital proof and, for larger orders, a physical press test. We refine until every detail is exactly right.</p>
+      </div>
+      <div class="process-step reveal">
+        <span class="step-num">04</span>
+        <h3 class="step-title">Press & Finish</h3>
+        <p class="step-desc">Each sheet is hand-fed through our vintage presses. Finishing touches — trimming, scoring, foiling — are applied by skilled hands.</p>
+      </div>
+      <div class="process-step reveal">
+        <span class="step-num">05</span>
+        <h3 class="step-title">Delivery</h3>
+        <p class="step-desc">Carefully packed and shipped, or collected from our studio. We include extras for keepsakes and assembly mishaps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Services / Products ── -->
+<section class="section products-section" id="services">
+  <div class="container">
+    <div class="section-header centered">
+      <p class="section-label">Our Services</p>
+      <h2 class="section-title">Printed with <em>intention</em></h2>
+      <p class="section-lead">Every category we offer is crafted to the same exacting standard — because we believe everything you print represents you.</p>
+    </div>
+    <div class="grid products-grid">
+      <div class="product-card reveal">
+        <div class="product-thumb thumb-wedding">
+          <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="50" y="30" width="180" height="140" rx="2" fill="rgba(255,255,255,0.6)" stroke="#C4845A" stroke-width="0.5"/>
+            <rect x="60" y="40" width="160" height="120" rx="1" fill="none" stroke="#C4845A" stroke-width="0.5" stroke-dasharray="2 4"/>
+            <line x1="140" y1="60" x2="140" y2="80" stroke="#B8965A" stroke-width="0.5"/>
+            <ellipse cx="140" cy="58" rx="12" ry="8" fill="none" stroke="#B8965A" stroke-width="0.5"/>
+            <text x="140" y="100" text-anchor="middle" fill="#8B4513" font-size="11" font-family="Georgia" opacity="0.6">Sarah &amp; James</text>
+            <text x="140" y="115" text-anchor="middle" fill="#8B4513" font-size="7" font-family="Georgia" opacity="0.4" letter-spacing="2">JUNE 14, 2025</text>
+            <line x1="90" y1="125" x2="190" y2="125" stroke="#C4845A" stroke-width="0.3"/>
+          </svg>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Wedding Suites</h3>
+          <p class="product-desc">Full invitation suites — invitation, RSVP, detail cards, and envelopes — pressed on luxurious cotton paper.</p>
+          <span class="product-tag">Most Popular</span>
+        </div>
+      </div>
+
+      <div class="product-card reveal">
+        <div class="product-thumb thumb-business">
+          <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="60" y="65" width="160" height="90" rx="2" fill="rgba(255,255,255,0.5)" stroke="#8B4513" stroke-width="0.5"/>
+            <rect x="70" y="75" width="140" height="70" rx="1" fill="none" stroke="#8B4513" stroke-width="0.3" stroke-dasharray="3 5"/>
+            <text x="140" y="105" text-anchor="middle" fill="#2C1810" font-size="10" font-family="Georgia" opacity="0.7">Marcus Elliot</text>
+            <text x="140" y="118" text-anchor="middle" fill="#8B4513" font-size="6.5" font-family="Georgia" opacity="0.5" letter-spacing="1.5">CREATIVE DIRECTOR</text>
+            <line x1="80" y1="123" x2="200" y2="123" stroke="#C4845A" stroke-width="0.3"/>
+          </svg>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Business Cards</h3>
+          <p class="product-desc">Make a lasting first impression with ultra-thick, deeply impressed letterpress business cards in single or double-sided formats.</p>
+          <span class="product-tag">Quick Turnaround</span>
+        </div>
+      </div>
+
+      <div class="product-card reveal">
+        <div class="product-thumb thumb-stationery">
+          <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="45" y="25" width="190" height="150" rx="2" fill="rgba(255,255,255,0.55)" stroke="#8B4513" stroke-width="0.5"/>
+            <line x1="45" y1="55" x2="235" y2="55" stroke="#C4845A" stroke-width="0.4"/>
+            <text x="140" y="45" text-anchor="middle" fill="#8B4513" font-size="8" font-family="Georgia" opacity="0.5" letter-spacing="2">PRESSED &amp; CO.</text>
+            <line x1="65" y1="80" x2="215" y2="80" stroke="#DDD4C5" stroke-width="0.4"/>
+            <line x1="65" y1="95" x2="215" y2="95" stroke="#DDD4C5" stroke-width="0.4"/>
+            <line x1="65" y1="110" x2="180" y2="110" stroke="#DDD4C5" stroke-width="0.4"/>
+            <line x1="65" y1="125" x2="215" y2="125" stroke="#DDD4C5" stroke-width="0.4"/>
+            <line x1="65" y1="140" x2="195" y2="140" stroke="#DDD4C5" stroke-width="0.4"/>
+          </svg>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Personal Stationery</h3>
+          <p class="product-desc">Monogrammed notecards, correspondence sets, and writing paper — the art of the handwritten note, elevated.</p>
+          <span class="product-tag">Personalised</span>
+        </div>
+      </div>
+
+      <div class="product-card reveal">
+        <div class="product-thumb thumb-art">
+          <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="70" y="20" width="140" height="160" rx="2" fill="rgba(255,255,255,0.5)" stroke="#8B4513" stroke-width="0.5"/>
+            <rect x="82" y="32" width="116" height="100" rx="1" fill="rgba(139,69,19,0.06)"/>
+            <circle cx="140" cy="82" r="30" fill="none" stroke="#8B4513" stroke-width="0.5"/>
+            <circle cx="140" cy="82" r="20" fill="none" stroke="#C4845A" stroke-width="0.3" stroke-dasharray="2 3"/>
+            <circle cx="140" cy="82" r="4" fill="#8B4513" opacity="0.3"/>
+            <line x1="110" y1="82" x2="130" y2="82" stroke="#8B4513" stroke-width="0.4"/>
+            <line x1="150" y1="82" x2="170" y2="82" stroke="#8B4513" stroke-width="0.4"/>
+            <line x1="140" y1="52" x2="140" y2="62" stroke="#8B4513" stroke-width="0.4"/>
+            <line x1="140" y1="102" x2="140" y2="112" stroke="#8B4513" stroke-width="0.4"/>
+            <text x="140" y="155" text-anchor="middle" fill="#8B4513" font-size="7" font-family="Georgia" opacity="0.4" letter-spacing="1.5">LIMITED EDITION</text>
+          </svg>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Art Prints</h3>
+          <p class="product-desc">Limited edition fine art letterpress prints for galleries, studios, and collectors. Signed and numbered runs available.</p>
+          <span class="product-tag">Limited Editions</span>
+        </div>
+      </div>
+
+      <div class="product-card reveal">
+        <div class="product-thumb thumb-packaging">
+          <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="55" y="50" width="170" height="110" rx="3" fill="rgba(255,255,255,0.5)" stroke="#8B4513" stroke-width="0.5"/>
+            <rect x="65" y="60" width="60" height="90" rx="2" fill="rgba(139,69,19,0.06)" stroke="#C4845A" stroke-width="0.3"/>
+            <rect x="155" y="60" width="60" height="90" rx="2" fill="rgba(139,69,19,0.06)" stroke="#C4845A" stroke-width="0.3"/>
+            <text x="95" y="112" text-anchor="middle" fill="#8B4513" font-size="6.5" font-family="Georgia" opacity="0.5" letter-spacing="1">ARTISAN</text>
+            <text x="95" y="122" text-anchor="middle" fill="#8B4513" font-size="6.5" font-family="Georgia" opacity="0.5" letter-spacing="1">PRESSED</text>
+            <circle cx="185" cy="105" r="18" fill="none" stroke="#8B4513" stroke-width="0.4"/>
+            <text x="185" y="109" text-anchor="middle" fill="#8B4513" font-size="7" font-family="Georgia" opacity="0.5">P&amp;C</text>
+          </svg>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Packaging & Labels</h3>
+          <p class="product-desc">Premium letterpress labels and hang-tags for artisan food, beverage, cosmetics, and luxury goods brands.</p>
+          <span class="product-tag">Brand Aligned</span>
+        </div>
+      </div>
+
+      <div class="product-card reveal">
+        <div class="product-thumb thumb-event">
+          <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="55" y="35" width="170" height="130" rx="2" fill="rgba(255,255,255,0.5)" stroke="#8B4513" stroke-width="0.5"/>
+            <line x1="55" y1="65" x2="225" y2="65" stroke="#C4845A" stroke-width="0.4"/>
+            <text x="140" y="55" text-anchor="middle" fill="#8B4513" font-size="9" font-family="Georgia" opacity="0.55" letter-spacing="2">AN EVENING OF</text>
+            <text x="140" y="92" text-anchor="middle" fill="#2C1810" font-size="14" font-family="Georgia" opacity="0.65" letter-spacing="1">Design & Culture</text>
+            <line x1="90" y1="102" x2="190" y2="102" stroke="#C4845A" stroke-width="0.3"/>
+            <text x="140" y="120" text-anchor="middle" fill="#8B4513" font-size="7.5" font-family="Georgia" opacity="0.45" letter-spacing="1">Thursday, 7pm — Doors Open</text>
+            <text x="140" y="135" text-anchor="middle" fill="#8B4513" font-size="7" font-family="Georgia" opacity="0.4">The Grand Hall, London</text>
+            <line x1="55" y1="150" x2="225" y2="150" stroke="#DDD4C5" stroke-width="0.3"/>
+          </svg>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Event & Editorial</h3>
+          <p class="product-desc">Programs, menus, invitations, and editorial inserts for galas, exhibitions, and cultural events that demand distinction.</p>
+          <span class="product-tag">Full Suite Available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Materials Strip ── -->
+<div class="materials-strip">
+  <div class="container">
+    <div class="materials-inner">
+      <span class="materials-heading">Papers we love</span>
+      <div class="materials-list">
+        <span class="material-chip">Crane Lettra 220gsm</span>
+        <span class="material-chip">Gmund Cotton</span>
+        <span class="material-chip">Colorplan</span>
+        <span class="material-chip">Savoy Cotton Rag</span>
+        <span class="material-chip">Reich Savoy</span>
+        <span class="material-chip">Arpa Luce</span>
+        <span class="material-chip">Custom Bespoke</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Testimonials ── -->
+<section class="section testimonials-section">
+  <div class="container">
+    <div class="section-header centered">
+      <p class="section-label">Client Stories</p>
+      <h2 class="section-title">Words that leave an <em>impression</em></h2>
+      <p class="section-lead">From brides to brand founders, here's what our clients say about the Pressed & Co. experience.</p>
+    </div>
+    <div class="grid testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The moment our guests held the invitations, I knew we'd made the right choice. The texture, the depth of impression — it set the tone for the entire wedding. Absolute perfection."</p>
+        <div class="testimonial-author">Olivia & Thomas W.</div>
+        <div class="testimonial-role">Wedding Suite — Cotswolds, 2024</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"As a brand designer, I'm extremely particular. Pressed & Co. didn't just meet my expectations — they exceeded them. My business cards start real conversations every single time."</p>
+        <div class="testimonial-author">Marcus Elliot</div>
+        <div class="testimonial-role">Branding Studio — London</div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"We use Pressed & Co. for all our product labels. The quality communicates our brand values instantly. Our retail buyers comment on the packaging before they even taste the product."</p>
+        <div class="testimonial-author">Fiona Marchetti</div>
+        <div class="testimonial-role">Founder — Marchetti Preserves</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pricing ── -->
+<section class="section pricing-section" id="pricing">
+  <div class="container">
+    <div class="section-header centered">
+      <p class="section-label">Investment</p>
+      <h2 class="section-title">Transparent, honest <em>pricing</em></h2>
+      <p class="section-lead">Letterpress is a time-intensive, skilled craft. Our pricing reflects the materials, expertise, and care that go into every single piece.</p>
+    </div>
+    <div class="grid pricing-grid">
+      <div class="pricing-card reveal">
+        <p class="pricing-name">Essentials</p>
+        <div class="pricing-price"><sup>from </sup>£180</div>
+        <p class="pricing-desc">Perfect for personal projects, small orders, and first-time letterpress clients.</p>
+        <ul class="pricing-features">
+          <li class="pricing-feature">50–150 pieces</li>
+          <li class="pricing-feature">Up to 2 ink colours</li>
+          <li class="pricing-feature">Single-sided printing</li>
+          <li class="pricing-feature">Crane Lettra or equivalent</li>
+          <li class="pricing-feature">Digital proof included</li>
+          <li class="pricing-feature">2–3 week turnaround</li>
+        </ul>
+        <a href="#contact" class="btn-ghost">Request Quote</a>
+      </div>
+
+      <div class="pricing-card featured reveal">
+        <span class="featured-badge">Most Chosen</span>
+        <p class="pricing-name">Signature</p>
+        <div class="pricing-price"><sup>from </sup>£480</div>
+        <p class="pricing-desc">Our most popular tier — ideal for wedding suites, brand stationery, and premium card sets.</p>
+        <ul class="pricing-features">
+          <li class="pricing-feature">100–500 pieces</li>
+          <li class="pricing-feature">Up to 3 ink colours</li>
+          <li class="pricing-feature">Double-sided printing</li>
+          <li class="pricing-feature">Premium paper selection</li>
+          <li class="pricing-feature">Physical press proof</li>
+          <li class="pricing-feature">Foil add-on available</li>
+          <li class="pricing-feature">Design consultation</li>
+        </ul>
+        <a href="#contact" class="btn-ghost">Request Quote</a>
+      </div>
+
+      <div class="pricing-card reveal">
+        <p class="pricing-name">Atelier</p>
+        <div class="pricing-price"><sup>from </sup>£1,200</div>
+        <p class="pricing-desc">Full bespoke service for clients who demand the very finest — editorial, luxury brand, and collector editions.</p>
+        <ul class="pricing-features">
+          <li class="pricing-feature">Custom quantities</li>
+          <li class="pricing-feature">Unlimited ink colours</li>
+          <li class="pricing-feature">Foil, emboss & blind options</li>
+          <li class="pricing-feature">Bespoke paper sourcing</li>
+          <li class="pricing-feature">Full design service</li>
+          <li class="pricing-feature">Priority production</li>
+          <li class="pricing-feature">White-glove delivery</li>
+        </ul>
+        <a href="#contact" class="btn-ghost">Request Quote</a>
+      </div>
+    </div>
+    <p class="muted" style="text-align:center;margin-top:2rem;font-size:0.85rem;">All prices are indicative and subject to project scope. Custom quotes provided within 24 hours.</p>
+  </div>
+</section>
+
+<!-- ── CTA Banner ── -->
+<section class="cta-banner" id="contact">
+  <div class="container">
+    <h2>Ready to make something <em>extraordinary</em>?</h2>
+    <p>Tell us about your project — we'd love to bring it to life through ink and impression.</p>
+    <div class="cta-btn-group">
+      <a href="mailto:hello@pressedandco.co.uk" class="btn">Start a Conversation</a>
+      <a href="#services" class="btn-ghost">See More Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">Pressed <span>&</span> Co.</div>
+        <p class="footer-tagline">Artisan letterpress printing from our studio in the heart of the city. Every impression made by hand, with intention.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Instagram">&#9670;</a>
+          <a href="#" class="social-link" aria-label="Pinterest">&#9670;</a>
+          <a href="#" class="social-link" aria-label="LinkedIn">&#9670;</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Services</h4>
+        <ul class="footer-links">
+          <li><a href="#">Wedding Suites</a></li>
+          <li><a href="#">Business Cards</a></li>
+          <li><a href="#">Personal Stationery</a></li>
+          <li><a href="#">Art Prints</a></li>
+          <li><a href="#">Packaging & Labels</a></li>
+          <li><a href="#">Event & Editorial</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Studio</h4>
+        <ul class="footer-links">
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">The Presses</a></li>
+          <li><a href="#">Paper Selection</a></li>
+          <li><a href="#">Design Services</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Portfolio</a></li>
+        </ul>
