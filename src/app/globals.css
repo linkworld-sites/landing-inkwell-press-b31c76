@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bone: #F5F0E8;
+  --color-press-black: #1C1410;
+  --color-letterpress-red: #C4503A;
+  --color-quartz-taupe: #8C7B6B;
+  --color-laid-paper: #D4C9B5;
+  --color-forest-ink: #2E3D35;
+}
+
+html {
+  background-color: var(--color-bone);
+}
+
+body {
+  background-color: var(--color-bone);
+  color: var(--color-press-black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-letterpress-red);
+  color: var(--color-bone);
+}
+
+@layer utilities {
+  .micro-label {
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .ghost-text {
+    opacity: 0.28;
+  }
+}
+
+/* Blog post body styles */
+.prose-pressedco h2 {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 1.75rem;
+  color: #1C1410;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.prose-pressedco h3 {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-weight: 300;
+  font-size: 1.25rem;
+  color: #1C1410;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-pressedco p {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 0.9375rem;
+  color: #8C7B6B;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.prose-pressedco em {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-style: italic;
+  color: #1C1410;
+  font-size: 1.05em;
+}
+
+.prose-pressedco blockquote {
+  border-left: 1px solid #D4C9B5;
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+}
+
+.prose-pressedco blockquote p {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #1C1410;
+}
+
+.prose-pressedco a {
+  color: #C4503A;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose-pressedco ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.25rem;
+}
+
+.prose-pressedco ul li::before {
+  content: '·';
+  color: #C4503A;
+  margin-right: 0.5rem;
+}
+
+.prose-pressedco ul li {
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 0.9375rem;
+  color: #8C7B6B;
+  line-height: 1.7;
+  padding-left: 1rem;
+}
+
+.prose-pressedco hr {
+  border: none;
+  border-top: 1px solid #D4C9B5;
+  margin: 2.5rem 0;
+}
